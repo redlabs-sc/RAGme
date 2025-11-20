@@ -1,0 +1,80 @@
+# RAGME System Configuration
+system:
+  name: "RAGME"
+  version: "0.1.0"
+  data_dir: "/home/user/RAGme/data"
+  log_level: "INFO"
+  log_file: "/home/user/RAGme/logs/app.log"
+
+# LLM Model Configuration
+model:
+  path: "/home/user/RAGme/data/models/qwen2.5-vl-7b-abliterated-q4_k_m.gguf"
+  context_length: 4096
+  gpu_layers: -1  # -1 = all layers on GPU
+  n_threads: 4
+
+# Inference Parameters
+inference:
+  temperature: 0.7
+  max_tokens: 2048
+  top_p: 0.9
+  top_k: 40
+  repeat_penalty: 1.1
+
+# RAG Configuration
+rag:
+  embedding_model: "all-MiniLM-L6-v2"
+  chunk_size: 512
+  chunk_overlap: 50
+  top_k: 5
+  rerank: true
+
+# Vector Database
+vector_db:
+  provider: "chromadb"
+  path: "/home/user/RAGme/data/vector_db"
+  collections:
+    - knowledge
+    - tools
+    - user_preferences
+    - conversations
+
+# Registry Database
+registry:
+  path: "/home/user/RAGme/data/registry.db"
+
+# Sandbox Configuration
+sandbox:
+  memory_limit: "2g"
+  cpu_limit: 2.0
+  timeout: 300  # seconds
+  network_enabled: true
+  base_image: "python:3.11-slim"
+
+# Training Sandbox
+training:
+  memory_limit: "8g"
+  gpu_enabled: true
+  base_image: "nvidia/cuda:12.1-runtime-ubuntu22.04"
+
+# LoRA Training Configuration
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  learning_rate: 0.0002
+  batch_size: 4
+  gradient_accumulation: 4
+  max_epochs: 3
+  warmup_ratio: 0.03
+  max_seq_length: 2048
+
+# Policy Configuration (load from policy.yaml)
+policy:
+  config_file: "/home/user/RAGme/config/policy.yaml"
+
+# Audit Configuration
+audit:
+  enabled: true
+  log_path: "/home/user/RAGme/logs/audit.log"
+  retention_days: 90

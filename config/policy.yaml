@@ -1,0 +1,58 @@
+# RAGME Policy Configuration
+# Hierarchical Capability-Category Access Control (CCAC)
+
+version: 1
+default_action: ask  # allow, deny, ask
+
+# Trust Levels
+# 0 = SANDBOX (testing only)
+# 1 = BASIC (standard approved operations)
+# 2 = ELEVATED (sensitive operations)
+# 3 = FULL (system-level access)
+
+# Category Approvals
+# Uncomment categories as you approve them
+category_approvals: []
+  # Example:
+  # - category: "file.read"
+  #   trust_level: 1
+  #   reason: "User approved file reading"
+  #   approved_at: "2025-01-01T00:00:00Z"
+
+# Tool Overrides (exceptions for specific tools)
+tool_overrides: []
+  # Example:
+  # - tool_id: "dangerous_tool_xyz"
+  #   decision: deny
+  #   reason: "Security risk identified"
+
+# Fine-Grained Rules
+rules: []
+  # Example rules:
+  # - name: "deny_dangerous_rm"
+  #   description: "Block dangerous rm commands"
+  #   pattern: "rm\\s+-rf\\s+/\\*"
+  #   pattern_type: "regex"
+  #   decision: deny
+  #   priority: 100
+  #   enabled: true
+  #
+  # - name: "allow_home_file_access"
+  #   description: "Allow file access in home directory"
+  #   pattern: "file.*"
+  #   pattern_type: "glob"
+  #   decision: allow
+  #   priority: 50
+  #   conditions:
+  #     - type: "path_pattern"
+  #       pattern: "/home/user/**"
+  #   enabled: true
+
+# Audit Settings
+audit:
+  enabled: true
+  log_path: "/home/user/RAGme/logs/audit.log"
+  retention_days: 90
+  log_approvals: true
+  log_denials: true
+  log_policy_changes: true
