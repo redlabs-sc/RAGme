@@ -248,19 +248,26 @@ if [ "$DOWNLOAD_MODEL" = true ]; then
         fi
 
         log_info "Downloading model (this will take a while)..."
-        log_info "Model: Qwen/Qwen2.5-VL-7B-Instruct-GGUF"
-        log_info "File: qwen2.5-vl-7b-instruct-q4_k_m.gguf"
+        log_info "Repository: mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF"
+        log_info "File: Qwen2.5-VL-7B-Instruct-abliterated.Q4_K_M.gguf (~4.7GB)"
 
-        # Download using huggingface-cli
-        huggingface-cli download \
-            Qwen/Qwen2.5-VL-7B-Instruct-GGUF \
-            qwen2.5-vl-7b-instruct-q4_k_m.gguf \
+        # Download using huggingface-cli (or hf command)
+        # Try newer 'hf' command first, fallback to 'huggingface-cli'
+        if command -v hf &> /dev/null; then
+            HF_CMD="hf download"
+        else
+            HF_CMD="huggingface-cli download"
+        fi
+
+        $HF_CMD \
+            mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF \
+            Qwen2.5-VL-7B-Instruct-abliterated.Q4_K_M.gguf \
             --local-dir "$MODEL_DIR" \
             --local-dir-use-symlinks False
 
-        # Rename to our expected filename
-        if [ -f "$MODEL_DIR/qwen2.5-vl-7b-instruct-q4_k_m.gguf" ]; then
-            mv "$MODEL_DIR/qwen2.5-vl-7b-instruct-q4_k_m.gguf" "$MODEL_FILE"
+        # Rename to our expected filename (standardized lowercase)
+        if [ -f "$MODEL_DIR/Qwen2.5-VL-7B-Instruct-abliterated.Q4_K_M.gguf" ]; then
+            mv "$MODEL_DIR/Qwen2.5-VL-7B-Instruct-abliterated.Q4_K_M.gguf" "$MODEL_FILE"
             log_success "Model downloaded successfully"
         else
             log_error "Model download failed"
