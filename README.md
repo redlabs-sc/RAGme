@@ -124,52 +124,66 @@ Task → Gap Detected → Solution Generated
 
 ## 🚀 Quick Start
 
-### 1. Clone Repository
+### Option A: Automated Installation (Recommended)
+
+**One-command setup for Kali Linux with RTX 4060:**
 
 ```bash
 git clone <repository-url> RAGme
 cd RAGme
+./setup_phase0.sh
 ```
 
-### 2. Follow Installation Guide
+This script automatically:
+- ✓ Checks prerequisites
+- ✓ Installs Docker + NVIDIA Container Toolkit
+- ✓ Downloads Qwen2.5-VL-7B model (~5GB)
+- ✓ Sets up Python environment with CUDA
+- ✓ Initializes databases
+- ✓ Creates configuration files
+- ✓ Verifies everything works
 
-See `INSTALL.md` for detailed setup instructions.
+**Time**: 1-3 hours (mostly download time)
 
-Quick summary:
+See **`QUICKSTART.md`** for details.
+
+### Option B: Manual Installation
+
+See **`INSTALL.md`** for detailed step-by-step instructions.
+
+### Verify Installation
+
+After setup, verify everything works:
+
 ```bash
-# Install prerequisites (Docker, CUDA)
-# Create virtual environment
-python3 -m venv venv
 source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-CMAKE_ARGS="-DLLAMA_CUBLAS=on" pip install llama-cpp-python --force-reinstall
-
-# Download model (~5GB)
-# See INSTALL.md for download instructions
-
-# Initialize databases
-python3 -c "import sqlite3; conn=sqlite3.connect('data/registry.db'); ..."
-
-# Configure
-cp .env.example .env
-# Edit .env with your paths
+python3 verify_installation.py
 ```
 
-### 3. Verify Installation
-
-```bash
-pytest tests/ -v
-```
+This checks:
+- Python dependencies
+- GPU access
+- Model file
+- Databases
+- Docker
+- Optional: Test model loading
 
 ---
 
 ## 📖 Documentation
 
+### Installation Guides
+
+- **`QUICKSTART.md`** - One-command automated setup (start here!)
+- **`INSTALL.md`** - Detailed manual installation guide
+- **`setup_phase0.sh`** - Automated installation script
+- **`verify_installation.py`** - Installation verification tool
+
+### System Documentation
+
 Complete documentation in `doc/`:
 
-- **`00_executive_summary.md`** - Quick overview (start here)
+- **`00_executive_summary.md`** - Quick overview
 - **`01_system_understanding.md`** - Detailed vision and specs
 - **`02_requirements.md`** - All 134 requirements
 - **`03_system_design.md`** - Complete architecture
