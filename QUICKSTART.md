@@ -119,13 +119,23 @@ sudo docker ps
 
 ### Model Download Fails
 
-**Symptom**: Hugging Face download timeout or error
+**Symptom**: Hugging Face download timeout or 401 error
 
-**Manual Download**:
+**Solution 1: Use alternative download script** (Recommended)
+```bash
+./download_model.sh
+```
+This script offers 3 download methods:
+- Option 1: wget (recommended, shows progress)
+- Option 2: curl (alternative)
+- Option 3: huggingface-cli (may require login)
+
+**Solution 2: Manual browser download**:
 1. Go to: https://huggingface.co/mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF
-2. Download: `Qwen2.5-VL-7B-Instruct-abliterated.Q4_K_M.gguf` (~4.7GB)
-3. Rename and place in: `~/RAGme/data/models/qwen2.5-vl-7b-instruct-abliterated-q4_k_m.gguf`
-4. Re-run setup script (it will detect existing file)
+2. Click "Files and versions" tab
+3. Download: `Qwen2.5-VL-7B-Instruct-abliterated.Q4_K_M.gguf` (~4.7GB)
+4. Rename and place in: `~/RAGme/data/models/qwen2.5-vl-7b-instruct-abliterated-q4_k_m.gguf`
+5. Re-run setup script (it will detect existing file)
 
 ### CUDA Not Detected
 
