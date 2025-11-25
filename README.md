@@ -120,59 +120,14 @@ The base model remains unchanged—all improvements are modular, versioned, and 
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
-### 1. Clone Repository
-```bash
-git clone <repository-url> RAGme
-cd RAGme
-```
+This repository contains the complete system design and implementation plan for RAGme.
 
-### 2. Install Dependencies
-```bash
-# Create virtual environment
-python3.11 -m venv venv
-source venv/bin/activate
-
-# Install Python packages
-pip install -r requirements.txt
-
-# Install llama.cpp with CUDA support
-cd ~/projects
-git clone https://github.com/ggerganov/llama.cpp
-cd llama.cpp
-make LLAMA_CUDA=1 -j$(nproc)
-
-# Install Python bindings
-CMAKE_ARGS="-DLLAMA_CUDA=1" pip install llama-cpp-python
-```
-
-### 3. Download Model
-```bash
-# Download Qwen2.5-VL-7B GGUF (Q4_K_M quantization)
-./download_model.sh
-
-# Or manually:
-pip install huggingface-hub
-huggingface-cli download Qwen/Qwen2.5-VL-7B-Instruct-GGUF \
-  qwen2.5-vl-7b-instruct-q4_k_m.gguf \
-  --local-dir data/models
-```
-
-### 4. Initialize Databases
-```bash
-# Setup ChromaDB and SQLite
-python -m src.persistence.init_db
-
-# Verify installation
-python verify_installation.py
-```
-
-### 5. Run System
-```bash
-# Start CLI interface
-python -m src.ui.cli.main
-```
+**To build the system**:
+1. Read through the documentation in order (DESIGN → ARCHITECTURE → PLAN)
+2. Follow the implementation steps in `docs/PLAN.md`
+3. Build each component according to the specifications
 
 ---
 
@@ -182,15 +137,9 @@ python -m src.ui.cli.main
 
 | Document | Description | Read Time |
 |----------|-------------|-----------|
-| **[01_DESIGN.md](docs/01_DESIGN.md)** | Complete system design and architecture specification | 45 min |
-| **[02_ARCHITECTURE.md](docs/02_ARCHITECTURE.md)** | Detailed component breakdown and data flows | 30 min |
-| **[03_IMPLEMENTATION.md](docs/03_IMPLEMENTATION.md)** | Phase-by-phase implementation guide with code examples | 60 min |
-
-### Quick Reference
-
-- **[QUICKSTART.md](QUICKSTART.md)** - Automated setup guide
-- **[config/](config/)** - Configuration templates
-- **[tests/](tests/)** - Test suite and examples
+| **[DESIGN.md](docs/DESIGN.md)** | Complete system design and architecture specification | 45 min |
+| **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** | Detailed component breakdown and comparisons | 30 min |
+| **[PLAN.md](docs/PLAN.md)** | Phase-by-phase implementation guide with code examples | 60 min |
 
 ---
 
@@ -329,86 +278,27 @@ System: [Uses existing tool immediately]
 
 ---
 
-## 🧪 Testing
-
-```bash
-# Run all tests
-pytest
-
-# Run specific test suites
-pytest tests/unit/           # Unit tests
-pytest tests/integration/    # Integration tests
-pytest tests/system/         # End-to-end tests
-
-# With coverage report
-pytest --cov=src --cov-report=html
-```
-
----
-
-## 📁 Project Structure
+## 📁 Repository Structure
 
 ```
 RAGme/
-├── README.md                  # This file
-├── QUICKSTART.md              # Quick setup guide
-├── requirements.txt           # Python dependencies
-├── setup.py                   # Package configuration
+├── README.md              # This file - System overview
 │
-├── docs/                      # Documentation
-│   ├── 01_DESIGN.md          # System design
-│   ├── 02_ARCHITECTURE.md    # Architecture details
-│   └── 03_IMPLEMENTATION.md  # Implementation guide
-│
-├── config/                    # Configuration files
-│   ├── system.yaml           # System configuration
-│   ├── policy.yaml           # Access control policies
-│   └── training.yaml         # LoRA training parameters
-│
-├── src/                       # Source code
-│   ├── core/                 # Core utilities
-│   ├── intelligence/         # LLM, RAG, vision
-│   │   ├── llm/             # LLM engine
-│   │   ├── rag/             # RAG system
-│   │   └── vision/          # Vision processing
-│   ├── capability/           # Tool/knowledge/adapter generators
-│   ├── execution/            # Sandboxes and executors
-│   ├── orchestration/        # Agent controller
-│   ├── persistence/          # Databases
-│   ├── policy/               # CCAC system
-│   └── ui/                   # User interfaces
-│       ├── cli/             # Command-line interface
-│       ├── api/             # REST API (future)
-│       └── mcp/             # MCP server (future)
-│
-├── data/                      # Data directory (gitignored)
-│   ├── models/               # GGUF models
-│   ├── vector_db/            # ChromaDB storage
-│   ├── registry.db           # SQLite registry
-│   └── logs/                 # Application logs
-│
-├── tools/                     # Generated tools (runtime)
-├── knowledge/                 # Knowledge modules (runtime)
-├── adapters/                  # LoRA adapters (runtime)
-│
-├── tests/                     # Test suite
-│   ├── unit/                 # Unit tests
-│   ├── integration/          # Integration tests
-│   └── system/               # System tests
-│
-└── scripts/                   # Utility scripts
-    ├── download_model.sh     # Model downloader
-    ├── setup_phase0.sh       # Automated setup
-    └── verify_installation.py # Installation checker
+└── docs/                  # Complete documentation
+    ├── DESIGN.md         # System design specification
+    ├── ARCHITECTURE.md   # Architecture details and comparisons
+    └── PLAN.md           # Phase-by-phase implementation guide
 ```
+
+**Note**: This repository contains the design documents only. Implementation files (source code, config, tests) will be created by following the `docs/PLAN.md` guide.
 
 ---
 
 ## 🤝 Contributing
 
-This is currently a single-user personal system in active development.
+This is currently a design specification repository.
 
-**Development Focus**: Follow the implementation plan in `docs/03_IMPLEMENTATION.md`.
+**To contribute to implementation**: Follow the plan in `docs/PLAN.md` to build the system.
 
 ---
 
@@ -437,10 +327,9 @@ Built on excellent open-source projects:
 
 ## 🎓 Learn More
 
-1. **Understand the Design**: Read `docs/01_DESIGN.md` for complete system specification
-2. **Explore Architecture**: Read `docs/02_ARCHITECTURE.md` for component details
-3. **Start Building**: Follow `docs/03_IMPLEMENTATION.md` for step-by-step guidance
-4. **Quick Setup**: Follow `QUICKSTART.md` for automated installation
+1. **Understand the Design**: Read `docs/DESIGN.md` for complete system specification
+2. **Explore Architecture**: Read `docs/ARCHITECTURE.md` for detailed comparisons
+3. **Start Building**: Follow `docs/PLAN.md` for step-by-step implementation guidance
 
 ---
 
