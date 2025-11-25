@@ -6,6 +6,23 @@ A self-evolving AI system that autonomously expands its capabilities through too
 
 ---
 
+## 🎨 REDESIGN NOTICE - November 2025
+
+**The system architecture has been redesigned for practicality and achievability.**
+
+📖 **Quick Start**: Read [`REDESIGN_SUMMARY.md`](REDESIGN_SUMMARY.md) (5 min overview)
+📖 **Full Details**: Read [`doc/COGNITIVE_PARTNER_REDESIGN.md`](doc/COGNITIVE_PARTNER_REDESIGN.md) (complete redesign)
+
+**Key Changes**:
+- ✅ Single model (Qwen2.5-VL-7B) fits 8GB VRAM - no ensemble needed initially
+- ✅ Simplified storage (ChromaDB + SQLite) - sufficient for single-user
+- ✅ Emergent concepts through tools/knowledge - practical approach
+- ✅ 8-week MVP timeline - achievable and focused
+
+**Core vision preserved**: Self-evolving AI that teaches itself new capabilities autonomously.
+
+---
+
 ## 🎯 What is RAGME?
 
 RAGME is an AI system that **teaches itself new capabilities** by:
